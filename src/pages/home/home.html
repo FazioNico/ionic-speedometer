@@ -1,14 +1,49 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
-</ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+
+<ion-content>
+
+
+  <!-- <pre>{{ (trackerInfo | async) | json }}</pre> -->
+
+  <radial-gauge
+      width="300"
+      height="300"
+      units="Km/h"
+      min-value="0"
+      max-value="220"
+      major-ticks="0,20,40,60,80,100,120,140,160,180,200,220"
+      minor-ticks="2"
+      stroke-ticks="true"
+      highlights='[
+          {"from": 160, "to": 220, "color": "rgba(255, 255, 255, .25)"}
+      ]'
+      color-plate="transparent"
+      color-units="#fff"
+      color-numbers="#fff"
+      color-stroke-ticks="#fff"
+      color-minor-ticks="rgba(255, 255, 255, .75)"
+      color-value-text="#fff"
+      color-value-text-shadow="false"
+      value-box-stroke="0"
+      color-value-box-background="transparent"
+      value-int="1"
+      border-shadow-width="0"
+      borders="false"
+      needle-type="arrow"
+      needle-width="2"
+      needle-circle-size="7"
+      needle-circle-outer="true"
+      needle-circle-inner="false"
+      animation-duration="1500"
+      animation-rule="linear"
+      [attr.value]="((storeInfo | async)?.speed )* 3.6 || 0"
+  ></radial-gauge>
+  <h1 text-center>Max: <span #maxSpeed>{{((recorsInfo | async)?.max)* 3.6 || 0}}</span>km/h</h1>
+  <!-- <button (click)="start()">start</button> -->
+
+  <ion-fab right bottom>
+    <button (click)="save(maxSpeed)" ion-fab mini>
+      <ion-icon color="light" name="cloud-upload"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>

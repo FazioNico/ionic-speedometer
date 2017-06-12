@@ -1,3 +1,35 @@
-page-home {
+// @Author: Nicolas Fazio <webmaster-fazio>
+// @Date:   30-05-2017
+// @Email:  contact@nicolasfazio.ch
+// @Last modified by:   webmaster-fazio
+// @Last modified time: 12-06-2017
 
+page-home {
+  ion-content, .content-md, .content-ios, .content{
+    background: #64b5f6;
+
+  }
+
+  h1 {
+    color: #fff;
+    font-weight: 300;
+  }
+
+  canvas{
+    display: block;
+    margin:auto;
+    margin-top:40%;
+    // width:90%!important;
+    height:auto!important;
+  }
+
+  .fab {
+
+    background: transparent!important;
+    border: solid 1px #fff;
+
+    ion-icon{
+      color: #fff!important;
+    }
+  }
 }

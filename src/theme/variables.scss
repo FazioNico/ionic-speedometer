@@ -1,3 +1,9 @@
+// @Author: Nicolas Fazio <webmaster-fazio>
+// @Date:   25-05-2017
+// @Email:  contact@nicolasfazio.ch
+// @Last modified by:   webmaster-fazio
+// @Last modified time: 12-06-2017
+
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/v2/theming/
 $font-path: "../assets/fonts";
@@ -76,3 +82,12 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+
+pre {
+  //background: rgba(255,255,255,.2);
+  padding: 20px;
+  margin:0px 0px 30px;
+  display:block;
+  width: 100%;
+  color: #fff;
+}

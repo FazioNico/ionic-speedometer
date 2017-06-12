@@ -1,26 +1,27 @@
-This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
+# Ionic Speedometer
+Ionic application using native Cordova plugin BackgroundGeolocation and Geolocation to catch user position and speed meter per second to get current user move speed in Km/h.
 
-## How to use this template
-
-*This template does not work on its own*. The shared files for each starter are found in the [ionic2-app-base repo](https://github.com/ionic-team/ionic2-app-base).
-
-To use this template, either create a new ionic project using the ionic node.js utility, or copy the files from this repository into the [Starter App Base](https://github.com/ionic-team/ionic2-app-base).
-
-### With the Ionic CLI:
-
-Take the name after `ionic2-starter-`, and that is the name of the template to be used when using the `ionic start` command below:
-
+## Install
 ```bash
-$ sudo npm install -g ionic cordova
-$ ionic start myBlank blank
+$ nvm use 7
+$ npm install
 ```
 
-Then, to run it, cd into `myBlank` and run:
+## Start
+Run application in dev mode
+```bash
+$ nvm use 7
+$ ionic serve
+```
+
+## Build
+Build application for ios
 
 ```bash
+$ nvm use 7
 $ ionic cordova platform add ios
-$ ionic cordova run ios
+$ ionic cordova build ios
 ```
 
-Substitute ios for android if not on a Mac.
-
+## About author
+Hi, i'm a Front-end developper living in Geneva Switzerland and i build hybrid mobile & web applications for almost 15 years. You can follow me on Twitter @FazioNico or checkout my own website http://nicolasfazio.ch
