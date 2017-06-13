@@ -3,7 +3,7 @@
  * @Date:   11-06-2017
  * @Email:  contact@nicolasfazio.ch
  * @Last modified by:   webmaster-fazio
- * @Last modified time: 12-06-2017
+ * @Last modified time: 13-06-2017
  */
 
  import { Action } from "@ngrx/store";
@@ -31,8 +31,9 @@
          return Object.assign({}, action.payload)
        }
        case MainActions.GET_TRACKER_DATA_SUCCESS: {
-         // console.log(Object.assign({}, action.payload))
-         return Object.assign({}, action.payload)
+         let rand:ITrackerState = {latitude: 46.1911856, longitude: 6.1357798, speed: Math.floor(Math.random() * 10) + 1};
+         let data:ITrackerState = action.payload;
+         return Object.assign({}, data)
        }
        default: {
          return <ITrackerState>state;

@@ -3,7 +3,7 @@
  * @Date:   11-06-2017
  * @Email:  contact@nicolasfazio.ch
  * @Last modified by:   webmaster-fazio
- * @Last modified time: 12-06-2017
+ * @Last modified time: 13-06-2017
  */
 
  import { Action } from "@ngrx/store";
@@ -23,7 +23,9 @@
      // console.log('RECORS REDUCER-> ', action);
      switch (action.type) {
        case MainActions.GET_TRACKER_DATA_SUCCESS: {
-         return (action.payload.speed > state.max )? Object.assign({}, state, {max: action.payload.speed}): state
+         let rand:number = Math.floor(Math.random() * 10) + 1;
+         let data:number = action.payload.speed;
+         return ( data> state.max )? Object.assign({}, state, {max: data }): state
        }
        default: {
          return <IRecorsState>state;

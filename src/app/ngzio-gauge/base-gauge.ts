@@ -3,7 +3,7 @@
  * @Date:   12-06-2017
  * @Email:  contact@nicolasfazio.ch
  * @Last modified by:   webmaster-fazio
- * @Last modified time: 12-06-2017
+ * @Last modified time: 13-06-2017
  */
 
 /**
@@ -52,7 +52,7 @@ export abstract class BaseGauge<T extends CanvasGauges.BaseGauge, T2 extends Can
         this.options = Object.assign(this.options || {} as T2, {
             renderTo: this.canvas.nativeElement
         });
-
+        //console.log(this.options)
         for (var i = 0; i < this.el.nativeElement.attributes.length; i++) {
             this.options[
                 this.el.nativeElement.attributes[i].name

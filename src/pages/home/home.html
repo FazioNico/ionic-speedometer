@@ -2,7 +2,6 @@
 
 <ion-content>
 
-
   <!-- <pre>{{ (trackerInfo | async) | json }}</pre> -->
 
   <radial-gauge
@@ -32,14 +31,17 @@
       needle-type="arrow"
       needle-width="2"
       needle-circle-size="7"
-      needle-circle-outer="true"
+      data-animated-value="true"
       needle-circle-inner="false"
-      animation-duration="1500"
+      animate-on-init="true"
+      animation="true"
       animation-rule="linear"
-      [attr.value]="((storeInfo | async)?.speed )* 3.6 || 0"
+      [attr.value]="((trackerInfo | async)?.speed )* 3.6 || 0"
   ></radial-gauge>
+
   <h1 text-center>Max: <span #maxSpeed>{{((recorsInfo | async)?.max)* 3.6 || 0}}</span>km/h</h1>
   <!-- <button (click)="start()">start</button> -->
 
-  <ngzio-controls [inputMax]="maxSpeed"></ngzio-controls>  
+  <ngzio-controls [inputMax]="maxSpeed"></ngzio-controls>
+
 </ion-content>
