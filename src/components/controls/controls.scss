@@ -1,0 +1,38 @@
+// @Author: Nicolas Fazio <webmaster-fazio>
+// @Date:   13-06-2017
+// @Email:  contact@nicolasfazio.ch
+// @Last modified by:   webmaster-fazio
+// @Last modified time: 13-06-2017
+
+ngzio-controls {
+
+    .fab {
+
+      background: transparent!important;
+      border: solid 1px rgba(255,255,255,.5);
+      transition: all 350ms ease;
+      -webkit-transition: -webkit-transform all 350ms ease; 
+
+      ion-icon{
+        color: rgba(255,255,255,.5)!important;
+      }
+    }
+    .fab.fab-ios {
+      font-size: 1rem;
+    }
+
+    .fab.fab-close-active {
+      border: solid 1px rgba(255,255,255,1);
+
+      ion-icon{
+        color: rgba(255,255,255,1)!important;
+      }
+    }
+    .fab.fab-ios-in-list.show {
+      border: solid 1px rgba(255,255,255,1);
+
+      ion-icon{
+        color: rgba(255,255,255,1)!important;
+      }
+    }
+}

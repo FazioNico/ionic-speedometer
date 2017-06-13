@@ -19,11 +19,13 @@ import { NgzioGaugeComponentModule } from './ngzio-gauge/ngzio-gauge.module';
 
 // Import ngrx Tools
 import { NgRxStoreModule } from "../store/store.module";
+import { ControlsComponent } from '../components/controls/controls';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
+    ControlsComponent,
     // LinearGaugeComponent,
     // RadialGaugeComponent
   ],

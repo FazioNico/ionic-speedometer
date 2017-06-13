@@ -1,0 +1,14 @@
+<!-- Generated template for the ControlsComponent component -->
+<ion-fab #fab right bottom>
+  <button ion-fab mini>
+    <ion-icon color="light" name="settings"></ion-icon>
+  </button>
+  <ion-fab-list side="left">
+    <button ion-fab (click)="save(inputMax, fab)">
+      <ion-icon color="light" name="cloud-upload"></ion-icon>
+    </button>
+    <button ion-fab (click)="stats(fab)">
+      <ion-icon color="light" name="stats"></ion-icon>
+    </button>
+  </ion-fab-list>
+</ion-fab>

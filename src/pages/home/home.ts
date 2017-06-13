@@ -3,7 +3,7 @@
  * @Date:   30-05-2017
  * @Email:  contact@nicolasfazio.ch
  * @Last modified by:   webmaster-fazio
- * @Last modified time: 12-06-2017
+ * @Last modified time: 13-06-2017
  */
 
 import { Component, OnInit } from '@angular/core';
@@ -48,7 +48,4 @@ export class HomePage implements OnInit{
     // this.store.dispatch(<Action>this.mainActions.stopTracking())
   }
 
-  save(data):void {
-    console.log('save max speed->', +data.innerHTML)
-  }
 }
