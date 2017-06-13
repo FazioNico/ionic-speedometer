@@ -3,11 +3,11 @@
  * @Date:   11-06-2017
  * @Email:  contact@nicolasfazio.ch
  * @Last modified by:   webmaster-fazio
- * @Last modified time: 12-06-2017
+ * @Last modified time: 13-06-2017
  */
 
 import { Injectable } from '@angular/core';
-import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
+import { BackgroundGeolocation, BackgroundGeolocationConfig, BackgroundGeolocationResponse } from '@ionic-native/background-geolocation';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/filter';
@@ -55,14 +55,14 @@ export class LocationTrackerService {
   startTracking():Observable<any> {
     return Observable.create((observer) => {
         // Background Tracking
-        let config = {
+        let config:BackgroundGeolocationConfig = {
           desiredAccuracy: 0,
           stationaryRadius: 20,
           distanceFilter: 10,
           debug: true,
           interval: 2000
         };
-        this.backgroundGeolocation.configure(config).subscribe((location) => {
+        this.backgroundGeolocation.configure(config).subscribe((location:BackgroundGeolocationResponse) => {
           // console.log('BackgroundGeolocation:  ', location);
           let data:ITrackerDatas = {
             latitude: location.latitude,
