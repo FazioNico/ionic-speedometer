@@ -3,7 +3,7 @@
  * @Date:   30-05-2017
  * @Email:  contact@nicolasfazio.ch
  * @Last modified by:   webmaster-fazio
- * @Last modified time: 12-06-2017
+ * @Last modified time: 13-06-2017
  */
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -19,21 +19,19 @@ import { NgzioGaugeComponentModule } from './ngzio-gauge/ngzio-gauge.module';
 
 // Import ngrx Tools
 import { NgRxStoreModule } from "../store/store.module";
-import { ControlsComponent } from '../components/controls/controls';
+import { ControlsComponentModule } from '../components/controls/controls.module';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
-    ControlsComponent,
-    // LinearGaugeComponent,
-    // RadialGaugeComponent
+    HomePage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     NgRxStoreModule,
-    NgzioGaugeComponentModule
+    NgzioGaugeComponentModule,
+    ControlsComponentModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
