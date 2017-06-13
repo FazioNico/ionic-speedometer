@@ -3,7 +3,7 @@
 * @Date:   15-03-2017
 * @Email:  contact@nicolasfazio.ch
  * @Last modified by:   webmaster-fazio
- * @Last modified time: 12-06-2017
+ * @Last modified time: 13-06-2017
 */
 
 import {Injectable} from '@angular/core';
@@ -28,4 +28,10 @@ export class MainActions {
     }
   }
 
+  errorClean(){
+    return <Action>{
+        type: MainActions.ERROR_CLEAN,
+        payload: null
+    }
+  }
 }

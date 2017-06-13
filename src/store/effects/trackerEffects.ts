@@ -3,7 +3,7 @@
 * @Date:   11-06-2017
 * @Email:  contact@nicolasfazio.ch
  * @Last modified by:   webmaster-fazio
- * @Last modified time: 12-06-2017
+ * @Last modified time: 13-06-2017
 */
 
 import { Injectable } from "@angular/core";
@@ -39,7 +39,13 @@ export class trackerEffects {
         .map<Action,any>(toPayload)
         .switchMap((payload:Observable<any>)=> {
           console.log('in getTrackerDatas$->', payload)
+          // TODO: test if payload has proprety latitude, longitude...
+          // to return error in case of empty of typeof string (error string)
           return this._locator.trackLocation()
+        })
+        .catch((err: any) => {
+          console.log('Error getTrackerDatas$ -->', err)
+          return Observable.of({ type: MainActions.START_BG_TRACKING_FAILED, payload: err })
         })
 
 }
