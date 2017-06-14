@@ -1,5 +1,7 @@
 # Ionic Speedometer
-Ionic application using native Cordova plugin BackgroundGeolocation and Geolocation to catch user position and speed meter per second to get current user move speed in Km/h.
+Ionic application using native Cordova plugin BackgroundGeolocation and Geolocation to catch real-time user position and user speed meter per second convert to Km/h. User can store max speed into Firebase with AngularFire2.
+
+Application datas flow working with ngrx/@store & ngrx/@effects.
 
 ## Install
 ```bash
