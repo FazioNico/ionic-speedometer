@@ -3,7 +3,7 @@
  * @Date:   11-06-2017
  * @Email:  contact@nicolasfazio.ch
  * @Last modified by:   webmaster-fazio
- * @Last modified time: 12-06-2017
+ * @Last modified time: 14-06-2017
  */
 
  import { combineReducers, ActionReducer, Action } from '@ngrx/store';
@@ -12,6 +12,8 @@
 
   import * as fromTracker from './trackerReducer';
   import * as fromRecors from './recorsReducer';
+  import * as fromAuth from './authReducer';
+  import * as fromNav from './navigationReducer';
   import * as fromError from './errorReducer';
 
   import { AppStateI, RecucerStateI } from '../app-stats';
@@ -19,8 +21,10 @@
   declare let process: any; // Typescript compiler will complain without this
 
   let reducers:RecucerStateI = {
+    auth: fromAuth.reducer,
     tracker: fromTracker.reducer,
     recors: fromRecors.reducer,
+    nav: fromNav.reducer,
     error: fromError.reducer
   };
   let developmentReducer:ActionReducer<AppStateI> = compose(storeFreeze, combineReducers)(reducers);

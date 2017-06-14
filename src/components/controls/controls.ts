@@ -9,6 +9,13 @@
 import { Component, Input } from '@angular/core';
 import { FabContainer } from 'ionic-angular';
 
+import { Store, Action } from '@ngrx/store'
+import { Observable } from 'rxjs/Rx';
+
+import { AppStateI } from "../../store/app-stats";
+import { IAuthState } from "../../store/reducers/authReducer";
+import { MainActions } from '../../store/actions/mainActions';
+
 /**
  * Generated class for the ControlsComponent component.
  *
@@ -23,12 +30,23 @@ export class ControlsComponent {
 
   @Input() inputMax: any;
 
-  constructor() {
+  public userInfo:Observable<IAuthState>
+
+  constructor(
+    private store: Store<any>,
+    private mainActions: MainActions
+  ) {
+    this.userInfo = this.store.select((state:AppStateI) => state.auth)
   }
 
   save(data: any, fab: FabContainer):void {
     fab.close();
-    console.log('save max speed->', data.innerHTML)
+    console.log('TODO: save max speed->', data.innerHTML)
+    this.store.dispatch(<Action>this.mainActions.checkAuth())
+    // this.store.dispatch(<Action>{
+    //           type: 'SAVE_TEST',
+    //           payload: data.innerHTML
+    //       })
   }
 
   stats(fab: FabContainer):void{

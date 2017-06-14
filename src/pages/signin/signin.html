@@ -1,0 +1,73 @@
+<!--
+  Generated template for the SigninPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-content padding>
+
+  <div *ngIf="!formType" margin-vertical text-center>
+    <h1>Authentiaction</h1>
+    <p margin-bottom>You need a user acount to save max speed.</p>
+
+    <div margin padding-top>
+      <button block ion-button (click)="showForm('login')">Login</button>
+      <button block ion-button (click)="showForm('signup')">Signup</button>
+      <button block ion-button (click)="dismiss()" color="danger">Cancel</button>
+    </div>
+
+  </div>
+
+  <div *ngIf="formType === 'login'" margin-vertical text-center>
+    <h1>Login</h1>
+    <p margin-bottom>{{ (userInfo|async ) | json }}</p>
+
+    <form [formGroup]="authForm">
+      <ion-list inset>
+
+        <ion-item>
+          <ion-label>Username</ion-label>
+          <ion-input id="email" name="email" type="email" placeholder="your@email.ch" formControlName="email" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Password</ion-label>
+          <ion-input id="password" name="password" type="password" placeholder="******" formControlName="password" required></ion-input>
+        </ion-item>
+
+      </ion-list>
+    </form>
+
+    <div margin padding-top>
+      <button block ion-button (click)="onLogin()" [disabled]="!authForm.valid">Login</button>
+      <button block ion-button (click)="showForm()" color="danger">Cancel</button>
+    </div>
+  </div>
+
+  <div *ngIf="formType === 'signup'" margin-vertical text-center>
+    <h1>Signup</h1>
+    <p margin-bottom>{{ (userInfo|async ) | json }}</p>
+
+    <form [formGroup]="authForm">
+      <ion-list inset>
+
+        <ion-item>
+          <ion-label>Username</ion-label>
+          <ion-input id="email" name="email" type="email" placeholder="your@email.ch" formControlName="email" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Password</ion-label>
+          <ion-input id="password" name="password" type="password" placeholder="******" formControlName="password" required></ion-input>
+        </ion-item>
+
+      </ion-list>
+    </form>
+
+    <div margin padding-top>
+      <button block ion-button (click)="onSignup()" [disabled]="!authForm.valid">Create acount</button>
+      <button block ion-button (click)="showForm()" color="danger">Cancel</button>
+    </div>
+  </div>
+</ion-content>

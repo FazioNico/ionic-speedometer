@@ -3,11 +3,11 @@
  * @Date:   30-05-2017
  * @Email:  contact@nicolasfazio.ch
  * @Last modified by:   webmaster-fazio
- * @Last modified time: 13-06-2017
+ * @Last modified time: 14-06-2017
  */
 
 import { Component, OnInit } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController, Modal } from 'ionic-angular';
 
 import { Store, Action } from '@ngrx/store'
 import { Observable } from 'rxjs/Rx';
@@ -29,10 +29,22 @@ export class HomePage implements OnInit{
   constructor (
     public navCtrl: NavController,
     private store: Store<any>,
-    private mainActions: MainActions
+    private mainActions: MainActions,
+    public modalCtrl: ModalController
   ) {
     this.trackerInfo = this.store.select((state:AppStateI) => state.tracker)
-    this.recorsInfo = this.store.select((state:AppStateI) => state.recors)
+    this.recorsInfo = this.store.select((state:AppStateI) => state.recors);
+    let a = this.store.select((state:AppStateI) => state.nav).subscribe((page) => {
+        if(page){
+          console.log(page)
+          let modal:Modal = this.modalCtrl.create(page);
+          modal.present();
+        }
+    })
+              // .subscribe((page:string) => {
+              //   console.log('home sub->', page)
+              //   this.openModal(page)
+              // })
   }
 
   ngOnInit(){
@@ -48,4 +60,8 @@ export class HomePage implements OnInit{
     // this.store.dispatch(<Action>this.mainActions.stopTracking())
   }
 
+  openModal(page):void{
+    let modal = this.modalCtrl.create(page);
+    modal.present();
+  }
 }
