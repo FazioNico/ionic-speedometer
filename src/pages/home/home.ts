@@ -34,7 +34,7 @@ export class HomePage implements OnInit{
   ) {
     this.trackerInfo = this.store.select((state:AppStateI) => state.tracker)
     this.recorsInfo = this.store.select((state:AppStateI) => state.recors);
-    let a = this.store.select((state:AppStateI) => state.nav).subscribe((page) => {
+    this.store.select((state:AppStateI) => state.nav).subscribe((page) => {
         if(page){
           console.log(page)
           let modal:Modal = this.modalCtrl.create(page);
@@ -54,6 +54,7 @@ export class HomePage implements OnInit{
 
   start():void{
     this.store.dispatch(<Action>this.mainActions.startTracking())
+    this.store.dispatch(<Action>this.mainActions.checkAuth())
   }
 
   stop():void{

@@ -3,11 +3,11 @@
  * @Date:   13-06-2017
  * @Email:  contact@nicolasfazio.ch
  * @Last modified by:   webmaster-fazio
- * @Last modified time: 13-06-2017
+ * @Last modified time: 14-06-2017
  */
 
 import { Component, Input } from '@angular/core';
-import { FabContainer } from 'ionic-angular';
+import { FabContainer, AlertController } from 'ionic-angular';
 
 import { Store, Action } from '@ngrx/store'
 import { Observable } from 'rxjs/Rx';
@@ -34,23 +34,49 @@ export class ControlsComponent {
 
   constructor(
     private store: Store<any>,
-    private mainActions: MainActions
+    private mainActions: MainActions,
+    public alertCtrl: AlertController
   ) {
     this.userInfo = this.store.select((state:AppStateI) => state.auth)
   }
 
-  save(data: any, fab: FabContainer):void {
+  save(user:any, data: any, fab: FabContainer):void {
     fab.close();
-    console.log('TODO: save max speed->', data.innerHTML)
-    this.store.dispatch(<Action>this.mainActions.checkAuth())
-    // this.store.dispatch(<Action>{
-    //           type: 'SAVE_TEST',
-    //           payload: data.innerHTML
-    //       })
+    console.log('save max speed->', data.innerHTML, user)
+    let alert = this.alertCtrl.create({
+      title: 'Save Recors',
+      subTitle: "Click on save to add your max speed to the recors list",
+      buttons: [
+      {
+        text: 'Cancel',
+        role: 'cancel'
+      },
+      {
+        text: 'Save',
+        handler: () => {
+          this.store.dispatch(<Action>{
+                    type: 'SAVE_RECORS',
+                    payload: {uid: user.id||null, max: data.innerHTML}
+                })
+        }
+      }]
+    });
+    alert.present();
   }
 
   stats(fab: FabContainer):void{
     fab.close();
     console.info('TODO: show stats')
+  }
+
+  profil(fab: FabContainer):void{
+    fab.close();
+    console.info('TODO: show profil')
+  }
+
+  doSignup(data: any, fab: FabContainer):void{
+    fab.close();
+    console.info('TODO: signup')
+    this.store.dispatch(<Action>{ type: 'OPEN_MODAL', payload: 'SignInModal' })
   }
 }

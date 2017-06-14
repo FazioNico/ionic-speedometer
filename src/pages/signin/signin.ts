@@ -47,6 +47,12 @@ export class SigninPage {
     private _formBuilder: FormBuilder
   ) {
     this.userInfo = this.store.select((state:AppStateI) => state.auth)
+    this.userInfo.subscribe(state=>{
+      console.log(state)
+      if(state){
+        this.dismiss()
+      }
+    })
     this.authForm = this._formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.minLength(5)])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(10)])],

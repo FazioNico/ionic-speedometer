@@ -13,48 +13,36 @@ import { Action } from '@ngrx/store';
 import { Effect, Actions, toPayload } from "@ngrx/effects";
 
 import { MainActions } from '../../store/actions/mainActions';
-// import { LocationTrackerService } from "../services/location-tracker/location-tracker";
-//import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth} from 'angularfire2/auth';
 import firebase from 'firebase';
-
 
 @Injectable()
 export class authEffects {
   constructor(
     private action$: Actions,
-    public af: AngularFireAuth,
-    //public auth$: AngularFireAuth,
-    //private _auth:AuthService,
-    //private _database: DatasService
+    private _auth$: AngularFireAuth,
   ) {
   }
 
   @Effect() checkAuth$ = this.action$
       // Listen for the 'CHECK_AUTH' action
       .ofType(MainActions.CHECK_AUTH)
-      .switchMap<Action, firebase.User>(() => this.af.authState)
+      .switchMap<Action, firebase.User>(() => this._auth$.authState)
       .map<any, Action>((_result:firebase.User) => {
-        console.log(_result)
+        // console.log('in checkAuth$',_result)
           if (_result) {
-              console.log("Firebase auth result-> ", _result)
               return <Action>{ type: MainActions.CHECK_AUTH_SUCCESS, payload: Object.assign({}, {email:_result.email}) }
           } else {
               return <Action>{ type: MainActions.CHECK_AUTH_NO_USER, payload: null }
           }
       })
       .switchMap((action) => {
-        console.log("test",action)
+        // console.log("test",action)
         if(action.type === MainActions.CHECK_AUTH_NO_USER){
-          return Observable.concat(
-            Observable.of(<Action>{ type: MainActions.CHECK_AUTH_NO_USER, payload: null }),
-            Observable.of(<Action>{ type: 'OPEN_MODAL', payload: 'SignInModal' })
-          )
+          return Observable.of(<Action>{ type: MainActions.CHECK_AUTH_NO_USER, payload: null })
+            // Observable.of(<Action>{ type: 'OPEN_MODAL', payload: 'SignInModal' })
         }
-        return Observable.concat(
-          Observable.of(<Action>{ type: MainActions.CHECK_AUTH_SUCCESS, payload: action.payload }),
-          Observable.of(<Action>{ type: 'SAVE_RECORS', payload: null }) // TODO: have to pass payload with recors max
-        )
+        return Observable.of(<Action>{ type: MainActions.CHECK_AUTH_SUCCESS, payload: action.payload })
       })
       .catch((res: any) => Observable.of({ type: MainActions.CHECK_AUTH_FAILED, payload: res }))
 
@@ -63,7 +51,7 @@ export class authEffects {
         .ofType('OPEN_MODAL')
         .map<Action, any>(toPayload)
         .switchMap((payload:Observable<any>) => {
-            console.log("in openModal$", payload)
+            //console.log("in openModal$", payload)
             return Observable.of<Action>({type: 'OPEN_MODAL_SUCCESS', payload})
         })
 
@@ -72,8 +60,8 @@ export class authEffects {
         .ofType(MainActions.LOGIN)
         .map<Action, any>(toPayload)
         .switchMap((payload:{email:string,password:string}) => {
-          console.log("in login$", payload)
-          return Observable.fromPromise(<Promise<firebase.Promise<any>>>this.af.auth.signInWithEmailAndPassword(payload.email, payload.password))
+          //console.log("in login$", payload)
+          return Observable.fromPromise(<Promise<firebase.Promise<any>>>this._auth$.auth.signInWithEmailAndPassword(payload.email, payload.password))
         })
         .switchMap((payload:any) => {
           return  Observable.of<Action>({type: 'TEST_LOGIN_SUCCESS', payload: Object.assign({}, {email:payload.email})})
@@ -87,11 +75,11 @@ export class authEffects {
         .ofType(MainActions.CREATE_USER)
         .map<Action, any>(toPayload)
         .switchMap((payload:{email:string,password:string}) => {
-            console.log("in signup$", payload)
-            return Observable.fromPromise(<Promise<firebase.Promise<any>>>this.af.auth.createUserWithEmailAndPassword(payload.email, payload.password))
+            //console.log("in signup$", payload)
+            return Observable.fromPromise(<Promise<firebase.Promise<any>>>this._auth$.auth.createUserWithEmailAndPassword(payload.email, payload.password))
         })
-        .switchMap((payload) => {
-            return  Observable.of<Action>({type: 'TEST_SIGNUP_SUCCESS', payload})
+        .switchMap((payload:any) => {
+            return  Observable.of<Action>({type: 'TEST_SIGNUP_SUCCESS', payload: Object.assign({}, {email:payload.email})})
         })
         .catch(err => {
           return  Observable.of<Action>({type: 'TEST_SIGNUP_FAILED', payload: err})

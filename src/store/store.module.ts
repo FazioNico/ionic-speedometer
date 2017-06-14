@@ -3,7 +3,7 @@
  * @Date:   11-06-2017
  * @Email:  contact@nicolasfazio.ch
  * @Last modified by:   webmaster-fazio
- * @Last modified time: 13-06-2017
+ * @Last modified time: 14-06-2017
  */
 
 
@@ -30,15 +30,8 @@
  import { AngularFireModule } from 'angularfire2';
  // import { AngularFireDatabaseModule } from 'angularfire2/database';
  import { AngularFireAuthModule } from 'angularfire2/auth';
+ import { FB_CONFIG } from "./store.config";
 
- export const firebaseConfig = {
-   apiKey: "AIzaSyCFBq9XRs_APh3msp0Jt4ZHDw6LBpEyWAs",
-   authDomain: "fir-training-fe4d9.firebaseapp.com",
-   databaseURL: "https://fir-training-fe4d9.firebaseio.com",
-   projectId: "fir-training-fe4d9",
-   storageBucket: "fir-training-fe4d9.appspot.com",
-   messagingSenderId: "958163163003"
- };
  const providers:Array<any> =  [
      LocationTrackerService,
      BackgroundGeolocation,
@@ -62,7 +55,7 @@
      EffectsModule.runAfterBootstrap(authEffects),
      StoreModule.provideStore(reducer),
      StoreDevtoolsModule.instrumentOnlyWithExtension(),
-     AngularFireModule.initializeApp(firebaseConfig),
+     AngularFireModule.initializeApp(FB_CONFIG),
      // AngularFireDatabaseModule,
      AngularFireAuthModule
    ],

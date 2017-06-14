@@ -4,11 +4,25 @@
     <ion-icon color="light" name="settings"></ion-icon>
   </button>
   <ion-fab-list side="left">
-    <button ion-fab (click)="save(inputMax, fab)">
-      <ion-icon color="light" name="cloud-upload"></ion-icon>
-    </button>
+
+    <div *ngIf="userInfo|async; let userInfo; else signup">
+      <button ion-fab (click)="save(userInfo, inputMax, fab)">
+        <ion-icon color="light" name="cloud-upload"></ion-icon>
+      </button>
+    </div>
+    <ng-template #signup>
+      <button ion-fab (click)="doSignup(inputMax, fab)">
+        <ion-icon color="light" name="cloud-upload"></ion-icon>
+      </button>
+    </ng-template>
+
     <button ion-fab (click)="stats(fab)">
       <ion-icon color="light" name="stats"></ion-icon>
     </button>
+
+    <button *ngIf="userInfo|async" ion-fab (click)="profil(fab)">
+      <ion-icon color="light" name="person"></ion-icon>
+    </button>
+
   </ion-fab-list>
 </ion-fab>
