@@ -2,7 +2,7 @@
 // @Date:   30-05-2017
 // @Email:  contact@nicolasfazio.ch
 // @Last modified by:   webmaster-fazio
-// @Last modified time: 13-06-2017
+// @Last modified time: 15-06-2017
 
 page-home {
   ion-content, .content-md, .content-ios, .content{
@@ -21,6 +21,10 @@ page-home {
     margin-top:40%;
     // width:90%!important;
     height:auto!important;
+  }
+
+  pre {
+    display:none;
   }
 
 }

@@ -2,7 +2,7 @@
 
 <ion-content>
 
-  <!-- <pre>{{ (trackerInfo | async) | json }}</pre> -->
+  <pre>{{ (trackerInfo | async) | json }}</pre>
 
   <radial-gauge
       width="300"
@@ -36,8 +36,9 @@
       animate-on-init="true"
       animation="true"
       animation-rule="linear"
-      [attr.value]="((trackerInfo | async)?.speed )* 3.6 || 0"
+      [attr.value]="((trackerInfo | async)?.speed ) || 0"
   ></radial-gauge>
+
 
   <h1 text-center>Max: <span #maxSpeed>{{((recorsInfo | async)?.max)* 3.6 || 0}}</span>km/h</h1>
   <!-- <button (click)="start()">start</button> -->

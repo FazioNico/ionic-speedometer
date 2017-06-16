@@ -3,7 +3,7 @@
 * @Date:   13-06-2017
 * @Email:  contact@nicolasfazio.ch
  * @Last modified by:   webmaster-fazio
- * @Last modified time: 15-06-2017
+ * @Last modified time: 16-06-2017
 */
 
 
@@ -29,9 +29,9 @@ export class authEffects {
       .ofType(MainActions.CHECK_AUTH)
       .switchMap<Action, firebase.User>(() => this._auth$.authState)
       .map<any, Action>((_result:firebase.User) => {
-        // console.log('in checkAuth$',_result)
+          // console.log('in checkAuth$',_result)
           if (_result) {
-              return <Action>{ type: MainActions.CHECK_AUTH_SUCCESS, payload: Object.assign({}, {email:_result.email}) }
+              return <Action>{ type: MainActions.CHECK_AUTH_SUCCESS, payload: Object.assign({}, {email:_result.email, id:_result.uid}) }
           } else {
               return <Action>{ type: MainActions.CHECK_AUTH_NO_USER, payload: null }
           }
@@ -46,13 +46,13 @@ export class authEffects {
       })
       .catch((res: any) => Observable.of({ type: MainActions.CHECK_AUTH_FAILED, payload: res }))
 
-    @Effect() openModal$ = this.action$
-        // Listen for the 'OPEN_MODAL' action
-        .ofType('OPEN_MODAL')
-        .map<Action, any>(toPayload)
-        .switchMap((payload:Observable<any>) => {
-            //console.log("in openModal$", payload)
-            return Observable.of<Action>({type: 'OPEN_MODAL_SUCCESS', payload})
+    @Effect() logout$ = this.action$
+        // Listen for the 'LOGOUT' action
+        .ofType(MainActions.LOGOUT)
+        .switchMap<Action, firebase.Promise<any>>(() => this._auth$.auth.signOut())
+        .switchMap(_=>  Observable.of<Action>({type: MainActions.LOGOUT_SUCCESS, payload: null}))
+        .catch(err => {
+          return  Observable.of<Action>({type: MainActions.LOGOUT_FAILED, payload: err})
         })
 
     @Effect() login$ = this.action$
@@ -64,10 +64,10 @@ export class authEffects {
           return Observable.fromPromise(<Promise<firebase.Promise<any>>>this._auth$.auth.signInWithEmailAndPassword(payload.email, payload.password))
         })
         .switchMap((payload:any) => {
-          return  Observable.of<Action>({type: 'TEST_LOGIN_SUCCESS', payload: Object.assign({}, {email:payload.email})})
+          return  Observable.of<Action>({type: MainActions.LOGIN_SUCCESS, payload: Object.assign({}, {email:payload.email, id:payload.uid})})
         })
         .catch(err => {
-          return  Observable.of<Action>({type: 'TEST_LOGIN_FAILED', payload: err})
+          return  Observable.of<Action>({type: MainActions.LOGIN_FAILED, payload: err})
         })
 
     @Effect() signup$ = this.action$
@@ -79,9 +79,18 @@ export class authEffects {
             return Observable.fromPromise(<Promise<firebase.Promise<any>>>this._auth$.auth.createUserWithEmailAndPassword(payload.email, payload.password))
         })
         .switchMap((payload:any) => {
-            return  Observable.of<Action>({type: 'TEST_SIGNUP_SUCCESS', payload: Object.assign({}, {email:payload.email})})
+            return  Observable.of<Action>({type: 'SIGNUP_SUCCESS', payload: Object.assign({}, {email:payload.email})})
         })
         .catch(err => {
-          return  Observable.of<Action>({type: 'TEST_SIGNUP_FAILED', payload: err})
+          return  Observable.of<Action>({type: 'SIGNUP_FAILED', payload: err})
+        })
+
+    @Effect() openModal$ = this.action$
+        // Listen for the 'OPEN_MODAL' action
+        .ofType('OPEN_MODAL')
+        .map<Action, any>(toPayload)
+        .switchMap((payload:Observable<any>) => {
+            //console.log("in openModal$", payload)
+            return Observable.of<Action>({type: 'OPEN_MODAL_SUCCESS', payload})
         })
 }

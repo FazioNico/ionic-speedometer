@@ -3,7 +3,7 @@
  * @Date:   30-05-2017
  * @Email:  contact@nicolasfazio.ch
  * @Last modified by:   webmaster-fazio
- * @Last modified time: 14-06-2017
+ * @Last modified time: 15-06-2017
  */
 
 import { Component, OnInit } from '@angular/core';
@@ -38,7 +38,10 @@ export class HomePage implements OnInit{
         if(page){
           console.log(page)
           let modal:Modal = this.modalCtrl.create(page);
-          modal.present();
+          modal.present()
+               .catch(err=>{
+                 this.store.dispatch(<Action>{type: 'OPEN_MODAL_FAILED', payload: err})
+               });
         }
     })
               // .subscribe((page:string) => {

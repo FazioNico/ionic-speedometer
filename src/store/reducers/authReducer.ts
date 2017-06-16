@@ -3,7 +3,7 @@
  * @Date:   13-06-2017
  * @Email:  contact@nicolasfazio.ch
  * @Last modified by:   webmaster-fazio
- * @Last modified time: 14-06-2017
+ * @Last modified time: 16-06-2017
  */
 
  import { Action } from "@ngrx/store";
@@ -19,11 +19,14 @@
  export function reducer (state:IAuthState = intitialState, action:Action):IAuthState {
      // console.log('AUTH REDUCER-> ', action);
      switch (action.type) {
-       case 'TEST_LOGIN': {
+       case MainActions.LOGIN: {
          return Object.assign({}, state)
        }
        case MainActions.CHECK_AUTH_SUCCESS: {
          return Object.assign({}, state, action.payload)
+       }
+       case MainActions.LOGOUT_SUCCESS:  {
+         return <IAuthState>intitialState;
        }
        default: {
          return <IAuthState>state;

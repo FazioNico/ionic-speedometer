@@ -19,6 +19,7 @@
  import { reducer } from '../store/reducers';
  import { trackerEffects } from '../store/effects/trackerEffects';
  import { authEffects } from '../store/effects/authEffects';
+ import { datasEffects } from '../store/effects/datasEffects';
  import { MainActions } from '../store/actions/mainActions';
 
  // Import Providers Services
@@ -28,7 +29,7 @@
 
  // AngularFire2
  import { AngularFireModule } from 'angularfire2';
- // import { AngularFireDatabaseModule } from 'angularfire2/database';
+ import { AngularFireDatabaseModule } from 'angularfire2/database';
  import { AngularFireAuthModule } from 'angularfire2/auth';
  import { FB_CONFIG } from "./store.config";
 
@@ -39,7 +40,8 @@
  ];
  const effects:Array<any> = [
      trackerEffects,
-     authEffects
+     authEffects,
+     datasEffects
  ];
  const actions:Array<any> = [
      MainActions
@@ -53,10 +55,11 @@
      HttpModule,
      EffectsModule.runAfterBootstrap(trackerEffects),
      EffectsModule.runAfterBootstrap(authEffects),
+     EffectsModule.runAfterBootstrap(datasEffects),
      StoreModule.provideStore(reducer),
      StoreDevtoolsModule.instrumentOnlyWithExtension(),
      AngularFireModule.initializeApp(FB_CONFIG),
-     // AngularFireDatabaseModule,
+     AngularFireDatabaseModule,
      AngularFireAuthModule
    ],
    providers: [...providers, ...effects, ...actions]

@@ -1,27 +1,27 @@
 <!-- Generated template for the ControlsComponent component -->
 <ion-fab #fab right bottom>
   <button ion-fab mini>
-    <ion-icon color="light" name="settings"></ion-icon>
+    <ion-icon name="settings"></ion-icon>
   </button>
   <ion-fab-list side="left">
 
     <div *ngIf="userInfo|async; let userInfo; else signup">
       <button ion-fab (click)="save(userInfo, inputMax, fab)">
-        <ion-icon color="light" name="cloud-upload"></ion-icon>
+        <ion-icon name="cloud-upload"></ion-icon>
       </button>
     </div>
     <ng-template #signup>
       <button ion-fab (click)="doSignup(inputMax, fab)">
-        <ion-icon color="light" name="cloud-upload"></ion-icon>
+        <ion-icon name="cloud-upload"></ion-icon>
       </button>
     </ng-template>
 
     <button ion-fab (click)="stats(fab)">
-      <ion-icon color="light" name="stats"></ion-icon>
+      <ion-icon name="stats"></ion-icon>
     </button>
 
     <button *ngIf="userInfo|async" ion-fab (click)="profil(fab)">
-      <ion-icon color="light" name="person"></ion-icon>
+      <ion-icon name="person"></ion-icon>
     </button>
 
   </ion-fab-list>

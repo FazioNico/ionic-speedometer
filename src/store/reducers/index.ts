@@ -3,7 +3,7 @@
  * @Date:   11-06-2017
  * @Email:  contact@nicolasfazio.ch
  * @Last modified by:   webmaster-fazio
- * @Last modified time: 14-06-2017
+ * @Last modified time: 16-06-2017
  */
 
  import { combineReducers, ActionReducer, Action } from '@ngrx/store';
@@ -14,6 +14,7 @@
   import * as fromRecors from './recorsReducer';
   import * as fromAuth from './authReducer';
   import * as fromNav from './navigationReducer';
+  import * as fromStats from './statsReducer';
   import * as fromError from './errorReducer';
 
   import { AppStateI, RecucerStateI } from '../app-stats';
@@ -25,6 +26,7 @@
     tracker: fromTracker.reducer,
     recors: fromRecors.reducer,
     nav: fromNav.reducer,
+    statistics: fromStats.reducer,
     error: fromError.reducer
   };
   let developmentReducer:ActionReducer<AppStateI> = compose(storeFreeze, combineReducers)(reducers);

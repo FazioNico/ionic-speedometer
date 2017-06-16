@@ -3,7 +3,7 @@
  * @Date:   13-06-2017
  * @Email:  contact@nicolasfazio.ch
  * @Last modified by:   webmaster-fazio
- * @Last modified time: 14-06-2017
+ * @Last modified time: 15-06-2017
  */
 
 import { Component, Input } from '@angular/core';
@@ -67,16 +67,16 @@ export class ControlsComponent {
   stats(fab: FabContainer):void{
     fab.close();
     console.info('TODO: show stats')
+    this.store.dispatch(<Action>{ type: 'OPEN_MODAL', payload: 'StatsModal' })
   }
 
   profil(fab: FabContainer):void{
     fab.close();
-    console.info('TODO: show profil')
+    this.store.dispatch(<Action>{ type: 'OPEN_MODAL', payload: 'ProfilModal' })
   }
 
   doSignup(data: any, fab: FabContainer):void{
     fab.close();
-    console.info('TODO: signup')
     this.store.dispatch(<Action>{ type: 'OPEN_MODAL', payload: 'SignInModal' })
   }
 }
